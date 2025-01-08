@@ -1,7 +1,10 @@
 import { WebSocketServer, WebSocket } from 'ws';
 
-const wss = new WebSocketServer({ port: 8080 });
-console.log('WebSocket server started on port 8080');
+// Use Railway's PORT environment variable or fallback to 8080
+const PORT = process.env.PORT || 8080;
+
+const wss = new WebSocketServer({ port: PORT });
+console.log(`WebSocket server started on port ${PORT}`);
 
 // Keep track of the current status
 let currentStatus = 'STANDBY';

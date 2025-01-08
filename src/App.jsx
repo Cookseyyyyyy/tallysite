@@ -5,13 +5,13 @@ function App() {
   // Customizable text and styles for each status
   const statusConfig = {
     RECORDING: {
-      displayText: 'Andy is a benny',  // Customize this text
+      displayText: '�� ON AIR',
       backgroundColor: '#ff0000',
       textColor: 'white',
       fontSize: '10vw'
     },
     STANDBY: {
-      displayText: 'READY',      // Customize this text
+      displayText: 'READY',
       backgroundColor: '#00ff00',
       textColor: 'white',
       fontSize: '10vw'
@@ -21,10 +21,12 @@ function App() {
   const [recordingStatus, setRecordingStatus] = useState('STANDBY');
 
   useEffect(() => {
-    const ws = new WebSocket('ws://172.31.160.1:8080');
+    // Use environment variable or fallback to localhost
+    const wsUrl = import.meta.env.VITE_WEBSOCKET_URL || 'ws://your-app-name.railway.app';
+    const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
-      console.log('Connected to WebSocket server');
+      console.log('Connected to WebSocket server at:', wsUrl);
     };
 
     ws.onmessage = (event) => {
